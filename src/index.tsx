@@ -67,3 +67,31 @@ const FilmList = () => {
 
 const root = ReactDom.createRoot(document.getElementById("root")!);
 root.render(<FilmList />);
+
+const bob = {
+  first: "bob",
+  last: "sanders",
+  city: "chicago",
+  siblings: {
+    sister: "jane",
+  },
+};
+
+const {
+  first,
+  last,
+  city,
+  siblings: { sister: sorella },
+} = bob;
+console.log(first, last, city, sorella);
+
+function printPerson({
+  first,
+  last,
+  city,
+  siblings: { sister: s },
+}: typeof bob) {
+  console.log(first, last, city, s);
+}
+
+printPerson(bob);
