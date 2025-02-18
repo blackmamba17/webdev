@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { ReactNode, useState } from "react";
 import ReactDom from "react-dom/client";
 
 const descStyle = {
   color: "red",
-  fontSize: "2rem",
-  padding: "3rem",
+  fontSize: "1.5rem",
+  padding: "0.5rem",
+  textAlign: "center" as const,
 };
 
 const movieTitles = [
@@ -44,7 +45,7 @@ const FilmCover = (props: { img: string; title?: string }) => {
 
 let i = 1;
 const FilmBlock = (props: {
-  children: unknown;
+  children: ReactNode;
   img: string;
   title: string;
   desc: string;
@@ -55,9 +56,8 @@ const FilmBlock = (props: {
   });
 
   return (
-    <>
+    <div style={{ textAlign: "center" }}>
       <FilmCover img={props.img} title={props.title} />
-      <Desc desc={props.desc} />
       <Title title={props.title} />
       <input
         onChange={() => {
@@ -91,12 +91,13 @@ const FilmBlock = (props: {
         click me
       </button>
       {props.children}
-    </>
+      <Desc desc={props.desc} />
+    </div>
   );
 };
 
 const FilmList = () => {
-  return [...Array(5)].map((_, index) => {
+  return movieTitles.map((_, index) => {
     return (
       <FilmBlock
         key={index}
