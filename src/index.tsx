@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDom from "react-dom/client";
 
 const descStyle = {
@@ -42,12 +42,55 @@ const FilmCover = (props: { img: string; title?: string }) => {
   return <img src={props.img} alt={props.title} />;
 };
 
-const FilmBlock = (props: { img: string; title: string; desc: string }) => {
+let i = 1;
+const FilmBlock = (props: {
+  children: unknown;
+  img: string;
+  title: string;
+  desc: string;
+}) => {
+  const [inputStyle, setInputStyle] = useState({
+    fontSize: `1rem`,
+    color: "blue",
+  });
+
   return (
     <>
       <FilmCover img={props.img} title={props.title} />
       <Desc desc={props.desc} />
       <Title title={props.title} />
+      <input
+        onChange={() => {
+          if (i == 2) {
+            i = 0;
+          }
+          i++;
+          console.log("hai cliccato quindi i è" + i);
+
+          setInputStyle({
+            ...inputStyle,
+            fontSize: `${i}rem`,
+          });
+
+          console.log(inputStyle);
+
+          console.log("adesso i è " + i);
+        }}
+        type="text"
+        name="input"
+        id="input"
+        style={inputStyle}
+      />
+      <button
+        type="button"
+        onClick={(e) => {
+          alert("diocane");
+          console.log({ ...e });
+        }}
+      >
+        click me
+      </button>
+      {props.children}
     </>
   );
 };
@@ -60,38 +103,38 @@ const FilmList = () => {
         img={movieImages[index]}
         title={movieTitles[index]}
         desc={movieDescriptions[index]}
-      />
+      >
+        <EventExamples />
+      </FilmBlock>
     );
   });
 };
 
-const root = ReactDom.createRoot(document.getElementById("root")!);
-root.render(<FilmList />);
-
-const bob = {
-  first: "bob",
-  last: "sanders",
-  city: "chicago",
-  siblings: {
-    sister: "jane",
-  },
+const EventExamples = () => {
+  return (
+    <>
+      <form action="">
+        <h2>typical form</h2>
+        <input
+          onChange={() => {
+            console.log("stai scrivendo");
+          }}
+          type="text"
+          name="example"
+          style={{ margin: "1rem 0" }}
+          id=""
+        />
+      </form>
+      <button
+        onClick={() => {
+          alert("gayyy");
+        }}
+      >
+        click me
+      </button>
+    </>
+  );
 };
 
-const {
-  first,
-  last,
-  city,
-  siblings: { sister: sorella },
-} = bob;
-console.log(first, last, city, sorella);
-
-function printPerson({
-  first,
-  last,
-  city,
-  siblings: { sister: s },
-}: typeof bob) {
-  console.log(first, last, city, s);
-}
-
-printPerson(bob);
+const root = ReactDom.createRoot(document.getElementById("root")!);
+root.render(<FilmList />);
