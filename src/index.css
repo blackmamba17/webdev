@@ -1,0 +1,27 @@
+.filmContainer{
+    position:relative;
+    border: solid black 1px;
+    border-radius: 1rem;
+    width: 50%;
+
+}
+
+.filmContainer span{
+    font-size: large;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 100;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border-top-left-radius: 1rem;
+        border-bottom-right-radius: 1rem;
+    background-color: #c35600;
+    color: white;
+}
+
+h1{
+    text-align: center;
+    margin-top: 4rem;
+    text-transform: capitalize;
+}
